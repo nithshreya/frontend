@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./login";
-import UserComponents from "./userComponents";
+import UserListComponent from "./userListComponent";
+import UserComponent from "./userComponent"
 
 class TokenCheck extends Component {
   constructor(props) {
@@ -13,15 +15,27 @@ class TokenCheck extends Component {
   handleLogin = (token) => {
     this.setState({
       ...this.state,
-      token:token,
+      token: token,
     });
-    localStorage.setItem('Token', token);
+    localStorage.setItem("Token", token);
   };
 
   render() {
     return this.state.token ? (
       <div>
-        <UserComponents />
+        {/* <UserListComponent /> */}
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <UserListComponent />
+            </Route>
+            <Route path="/user/new" component={UserComponent} />
+            {/* <Route path="/user/:id">
+              <UserComponent />
+            </Route> */}
+            <Route path="/user/:id" component={UserComponent} />
+          </Switch>
+        </Router>
       </div>
     ) : (
       <div>

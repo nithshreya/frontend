@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+// import { hashHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
 const axios = require("axios");
 
-class UserComponents extends Component {
+
+class UserListComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,11 +34,22 @@ class UserComponents extends Component {
       });
   };
 
-  handleClick = (user) => {
-    return (event) => {
-      console.log(event.target, user);
-    };
-  };
+  // handleClick = (user) => {
+  //   return (event) => {
+  //     console.log(user._id);
+  //   };
+  // };
+
+  sayHello = (user) => {
+    // alert(`hello, ${user._id}`);
+    // return <Redirect to = {`/user/${user._id}`} />
+    console.log(this.props)
+    this.props.history.push(`/user/${user._id}`);
+  }
+
+  newUser = () => {
+    this.props.history.push(`/user/new`);
+  }
 
   render() {
     return (
@@ -55,7 +69,7 @@ class UserComponents extends Component {
             {this.state.users.map((user, i) => {
               // console.log({user})
               return (
-                <tr onClick={this.handleClick(user)} key={i}>
+                <tr key={i} onClick = {() => this.sayHello(user)}>
                   <td>{i + 1}</td>
                   <td>{user.name}</td>
                   <td>{user.age}</td>
@@ -67,9 +81,12 @@ class UserComponents extends Component {
             })}
           </tbody>
         </table>
+        <button type="button" onClick={this.newUser}>
+          NewUser
+        </button>
       </div>
     );
   }
 }
 
-export default UserComponents;
+export default withRouter(UserListComponent);
