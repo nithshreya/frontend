@@ -45,9 +45,9 @@ class Login extends Component {
   render() {
     console.log(this.props);
     return (
-      <div class="wrapper">
+      <div class="login-page">
         <div class="1">Welcome!</div>
-        <div class="nested">
+        <div class="form">
           <div class="n1">
             <h2>
               <b>Login</b>
@@ -81,8 +81,8 @@ class Login extends Component {
             ></input>
             <br />
           </div>
-          <div class="n3">
-            <button type="button" onClick={this.doLogin}>
+          <div class="login-button">
+            <button id="button" onClick={this.doLogin}>
               Login
             </button>
           </div>

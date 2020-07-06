@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import './userListComponent.css';
+import "./userListComponent.css";
 
 // import { hashHistory } from 'react-router';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 const axios = require("axios");
-
 
 class UserListComponent extends Component {
   constructor(props) {
@@ -45,47 +44,58 @@ class UserListComponent extends Component {
   sayHello = (user) => {
     // alert(`hello, ${user._id}`);
     // return <Redirect to = {`/user/${user._id}`} />
-    console.log(this.props)
+    console.log(this.props);
     this.props.history.push(`/user/${user._id}`);
-  }
+  };
 
   newUser = () => {
     this.props.history.push(`/user/new`);
-  }
+  };
 
   render() {
     return (
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>name</th>
-              <th>age</th>
-              <th>sex</th>
-              <th>pin</th>
-              <th>role</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.users.map((user, i) => {
-              // console.log({user})
-              return (
-                <tr key={i} onClick = {() => this.sayHello(user)}>
-                  <td>{i + 1}</td>
-                  <td>{user.name}</td>
-                  <td>{user.age}</td>
-                  <td>{user.sex}</td>
-                  <td>{user.pin}</td>
-                  <td>{user.role}</td>
+      <div class="user-list">
+        <div class="subgrid1">
+          <div class="n1">
+            <b>Members</b>
+          </div>
+          <div class="n2">
+            <button type="button" onClick={this.newUser}>
+              Add Member
+            </button>
+          </div>
+        </div>
+        <div class="subgrid2">
+          <div class="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Age</th>
+                  <th>Sex</th>
+                  <th>Pin</th>
+                  <th>Role</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <button type="button" onClick={this.newUser}>
-          NewUser
-        </button>
+              </thead>
+              <tbody>
+                {this.state.users.map((user, i) => {
+                  // console.log({user})
+                  return (
+                    <tr key={i} onClick={() => this.sayHello(user)}>
+                      <td>{i + 1}</td>
+                      <td>{user.name}</td>
+                      <td>{user.age}</td>
+                      <td>{user.sex}</td>
+                      <td>{user.pin}</td>
+                      <td>{user.role}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     );
   }

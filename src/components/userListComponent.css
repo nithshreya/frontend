@@ -1,5 +1,61 @@
-.button {
-    background: red;
-    border-radius: 8px;
-    color: white;
-  }
+button {
+  background-color: #4c0090;
+  color: white;
+  padding: 12px 15px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.user-list {
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  row-gap: 2em;
+  width: 100vw;
+  height: 100vh;
+}
+
+.subgrid1 {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+.subgrid1 > div:first-child {
+  padding: 1em 2em;
+  font-size: xx-large;
+  /* background-color: #4c0090; */
+}
+
+.subgrid1 > div:last-child {
+  align-self: flex-end;
+  padding-right: 5em;
+}
+
+/* .user-list > div:last-child {
+  width: 100vw;
+  background-color: #4c0090;
+  justify-self: center;
+  padding-right: 5em;
+} */
+
+.subgrid2 {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.table {
+  background-color:rgb(38, 35, 53);
+  align-self: flex-start;
+  justify-self: center;
+  table-layout: fixed;
+  width: 80%;
+  border-collapse: collapse;
+  border: 3px solid #4c0090;
+}
+
+/* .user-list > div:nth-child(2) {
+}
+
+.user-list > div:last-child {
+} */
