@@ -9,7 +9,7 @@ class Login extends Component {
     };
   }
 
-  handleLogin = () => {
+  doLogin = () => {
     axios
       .post("http://localhost:5000/users/login", {
         username: this.state.username,
@@ -62,7 +62,7 @@ class Login extends Component {
           onChange={this.setPassword}
         ></input>
         <br />
-        <button type="button" onClick={this.handleLogin}>
+        <button type="button" onClick={this.doLogin}>
           Submit
         </button>
       </div>

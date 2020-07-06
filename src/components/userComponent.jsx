@@ -20,19 +20,23 @@ class UserComponent extends Component {
   }
 
   saveChanges = () => {
-    if(this.state.already){
-      return this.editUser()
+    if (this.state.already) {
+      return this.editUser();
+    } else {
+      return this.createUser();
     }
-    else{
-      return this.createUser()
-    }
-  }
+  };
 
   editUser = () => {
     axios
       .patch(
         `http://localhost:5000/users/${this.props.match.params.id}`,
-        this.state.updatedUser
+        this.state.updatedUser,
+        {
+          headers: {
+            authorization: localStorage.getItem("Token"),
+          },
+        }
       )
       .then((response) => {
         this.setState({ ...this.state });
@@ -45,10 +49,7 @@ class UserComponent extends Component {
 
   createUser = () => {
     axios
-      .post(
-        `http://localhost:5000/users`,
-        this.state.updatedUser
-      )
+      .post(`http://localhost:5000/users`, this.state.updatedUser)
       .then((response) => {
         this.setState({ ...this.state });
         console.log(response);
@@ -117,7 +118,11 @@ class UserComponent extends Component {
       return;
     }
     axios
-      .get(`http://localhost:5000/users/${this.props.match.params.id}`)
+      .get(`http://localhost:5000/users/${this.props.match.params.id}`, {
+        headers: {
+          authorization: localStorage.getItem("Token"),
+        },
+      })
       .then((response) => {
         const { name, age, sex, pin, role } = response.data;
         this.setState(
@@ -146,21 +151,19 @@ class UserComponent extends Component {
               type="text"
               id="username"
               name="username"
-              value={
-                this.state.updatedUser.username || ''
-              }
+              value={this.state.updatedUser.username || ""}
               onChange={this.enterUsername}
-            ></input><br />
+            ></input>
+            <br />
             <label htmlFor="password">Password: </label>
             <input
               type="text"
               id="password"
               name="password"
-              value={
-                this.state.updatedUser.password || ''
-              }
+              value={this.state.updatedUser.password || ""}
               onChange={this.enterPassword}
-            ></input><br />
+            ></input>
+            <br />
           </>
         );
       }
