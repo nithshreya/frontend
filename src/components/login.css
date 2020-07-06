@@ -1,0 +1,72 @@
+h2 {
+  /* text-align: center; */
+  /* padding: 20px; */
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 7px 8px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 15px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  column-gap: 2em;
+  /* width: 100vw; */
+  height: 100vh;
+}
+
+.nested {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  padding-left: 5em;
+  padding-right: 5em;
+  row-gap: 0px;
+  /* width: 100vw; */
+  /* height: 100vh; */
+}
+
+.nested > div:first-child {
+  /* background-color: #282cdd; */
+  align-self: flex-end;
+  text-align: center;
+}
+.nested > div:nth-child(2){
+  /* background-color: #282cdd; */
+  /* padding-left: 5em;
+  padding-right: 5em; */
+  align-self: center;
+  text-align: start;
+}
+.nested > div:last-child{
+  /* background-color: #282cdd; */
+  text-align: center;
+}
+
+.wrapper > div:first-child {
+  /* background-color: #282c34; */
+  margin: auto;
+  font-size: xx-large;
+}
+.wrapper > div:nth-child(2) {
+  background-color: rgb(38, 35, 53);
+}

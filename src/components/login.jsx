@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import "./login.css";
 const axios = require("axios");
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "abhi",
-      password: "abhi123",
+      username: "",
+      password: "",
     };
   }
 
@@ -42,29 +43,50 @@ class Login extends Component {
 
   //   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
     return (
-      <div>
-        <h1>Login Page</h1> <br />
-        <label htmlFor="username">Enter Username:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          onChange={this.setUsername}
-        ></input>
-        <br />
-        <label htmlFor="password">Enter Password:</label>
-        <input
-          type="text"
-          id="password"
-          name="password"
-          onChange={this.setPassword}
-        ></input>
-        <br />
-        <button type="button" onClick={this.doLogin}>
-          Submit
-        </button>
+      <div class="wrapper">
+        <div class="1">Welcome!</div>
+        <div class="nested">
+          <div class="n1">
+            <h2>
+              <b>Login</b>
+            </h2>
+          </div>
+          <div class="n2">
+            <label htmlFor="username">
+              <strong>Username</strong>
+            </label>
+            <br />
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Enter Username"
+              onChange={this.setUsername}
+              required
+            ></input>
+            <br />
+            <label htmlFor="password">
+              <b>Password</b>
+            </label>
+            <br />
+            <input
+              type="text"
+              id="password"
+              name="password"
+              placeholder="Enter Password"
+              onChange={this.setPassword}
+              required
+            ></input>
+            <br />
+          </div>
+          <div class="n3">
+            <button type="button" onClick={this.doLogin}>
+              Login
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
