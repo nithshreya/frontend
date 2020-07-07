@@ -72,7 +72,7 @@ class Login extends Component {
             </label>
             <br />
             <input
-              type="text"
+              type="password"
               id="password"
               name="password"
               placeholder="Enter Password"

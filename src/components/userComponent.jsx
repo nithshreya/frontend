@@ -66,6 +66,12 @@ class UserComponent extends Component {
       ...this.state,
       updatedUser: { ...this.state.updatedUser, name: e.target.value },
     });
+    // if (!e.target.value) {
+    //   this.setState({
+    //     ...this.state,
+    //     user: { ...this.state.user, name: "" },
+    //   });
+    // }
   };
 
   changeAge = (e) => {
@@ -158,7 +164,7 @@ class UserComponent extends Component {
             <br />
             <label htmlFor="password">Password: </label>
             <input
-              type="text"
+              type="password"
               id="password"
               name="password"
               value={this.state.updatedUser.password || ""}
@@ -174,13 +180,17 @@ class UserComponent extends Component {
         <div class="user-data">
           <h1>User Data</h1>
         </div>
-        <div class = "user-info">
+        <div class="user-info">
           <label htmlFor="fname">Name: </label>
           <input
             type="text"
             id="fname"
             name="fname"
-            value={this.state.updatedUser.name || this.state.user.name}
+            value={
+              this.state.updatedUser.name == undefined
+                ? this.state.user.name
+                : this.state.updatedUser.name
+            }
             onChange={this.changeName}
           ></input>
           <br />
@@ -189,7 +199,11 @@ class UserComponent extends Component {
             type="text"
             id="age"
             name="age"
-            value={this.state.updatedUser.age || this.state.user.age}
+            value={
+              this.state.updatedUser.age == undefined
+                ? this.state.user.age
+                : this.state.updatedUser.age
+            }
             onChange={this.changeAge}
           ></input>
           <br />
@@ -198,27 +212,61 @@ class UserComponent extends Component {
             type="text"
             id="pin"
             name="pin"
-            value={this.state.updatedUser.pin || this.state.user.pin}
+            value={
+              this.state.updatedUser.pin == undefined
+                ? this.state.user.pin
+                : this.state.updatedUser.pin
+            }
             onChange={this.changePin}
           ></input>
           <br />
           <label htmlFor="role">Role: </label>
-          <input
-            type="text"
-            id="role"
-            name="role"
-            value={this.state.updatedUser.role || this.state.user.role}
+          <select
+            value={
+              this.state.updatedUser.role == undefined
+                ? this.state.user.role
+                : this.state.updatedUser.role
+            }
             onChange={this.changeRole}
-          ></input>
+          >
+            <option name="admin"> admin</option>
+            <option name="user">user</option>
+          </select>
           <br />
           <label htmlFor="sex">Sex: </label>
-          <input
-            type="text"
-            id="sex"
-            name="sex"
-            value={this.state.updatedUser.sex || this.state.user.sex}
-            onChange={this.changeSex}
-          ></input>
+          <div>
+            <div>
+              <input
+                type="radio"
+                class="sex"
+                name="sex"
+                value="M"
+                checked={
+                  this.state.updatedUser.sex == undefined
+                    ? this.state.user.sex === "M"
+                    : this.state.updatedUser.sex === "M"
+                }
+                onChange={this.changeRole}
+                onChange={this.changeSex}
+              />
+              <span>Male</span>
+            </div>
+            <div>
+              <input
+                type="radio"
+                class="sex"
+                name="sex"
+                value="F"
+                checked={
+                  this.state.updatedUser.sex == undefined
+                    ? this.state.user.sex === "F"
+                    : this.state.updatedUser.sex === "F"
+                }
+                onChange={this.changeSex}
+              />
+              <span>Female</span>
+            </div>
+          </div>
           <br />
           {checkExistance()}
           <button type="button" onClick={this.saveChanges}>
