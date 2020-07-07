@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./userComponent.css";
 // import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const axios = require("axios");
@@ -169,58 +170,61 @@ class UserComponent extends Component {
       }
     };
     return (
-      <div>
-        <h1>User Data</h1>
-        <br />
-        <label htmlFor="fname">Name: </label>
-        <input
-          type="text"
-          id="fname"
-          name="fname"
-          value={this.state.updatedUser.name || this.state.user.name}
-          onChange={this.changeName}
-        ></input>
-        <br />
-        <label htmlFor="age">Age: </label>
-        <input
-          type="text"
-          id="age"
-          name="age"
-          value={this.state.updatedUser.age || this.state.user.age}
-          onChange={this.changeAge}
-        ></input>
-        <br />
-        <label htmlFor="pin">Pin: </label>
-        <input
-          type="text"
-          id="pin"
-          name="pin"
-          value={this.state.updatedUser.pin || this.state.user.pin}
-          onChange={this.changePin}
-        ></input>
-        <br />
-        <label htmlFor="role">Role: </label>
-        <input
-          type="text"
-          id="role"
-          name="role"
-          value={this.state.updatedUser.role || this.state.user.role}
-          onChange={this.changeRole}
-        ></input>
-        <br />
-        <label htmlFor="sex">Sex: </label>
-        <input
-          type="text"
-          id="sex"
-          name="sex"
-          value={this.state.updatedUser.sex || this.state.user.sex}
-          onChange={this.changeSex}
-        ></input>
-        <br />
-        {checkExistance()}
-        <button type="button" onClick={this.saveChanges}>
-          Save
-        </button>
+      <div class="user">
+        <div class="user-data">
+          <h1>User Data</h1>
+        </div>
+        <div class = "user-info">
+          <label htmlFor="fname">Name: </label>
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            value={this.state.updatedUser.name || this.state.user.name}
+            onChange={this.changeName}
+          ></input>
+          <br />
+          <label htmlFor="age">Age: </label>
+          <input
+            type="text"
+            id="age"
+            name="age"
+            value={this.state.updatedUser.age || this.state.user.age}
+            onChange={this.changeAge}
+          ></input>
+          <br />
+          <label htmlFor="pin">Pin: </label>
+          <input
+            type="text"
+            id="pin"
+            name="pin"
+            value={this.state.updatedUser.pin || this.state.user.pin}
+            onChange={this.changePin}
+          ></input>
+          <br />
+          <label htmlFor="role">Role: </label>
+          <input
+            type="text"
+            id="role"
+            name="role"
+            value={this.state.updatedUser.role || this.state.user.role}
+            onChange={this.changeRole}
+          ></input>
+          <br />
+          <label htmlFor="sex">Sex: </label>
+          <input
+            type="text"
+            id="sex"
+            name="sex"
+            value={this.state.updatedUser.sex || this.state.user.sex}
+            onChange={this.changeSex}
+          ></input>
+          <br />
+          {checkExistance()}
+          <button type="button" onClick={this.saveChanges}>
+            Save
+          </button>
+        </div>
       </div>
     );
   }

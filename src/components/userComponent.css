@@ -1,0 +1,30 @@
+.user {
+  display: grid;
+  grid-template-rows: 1.5fr 5fr;
+  row-gap: 2em;
+  width: 100vw;
+  height: 100vh;
+}
+
+.user > div:first-child {
+  align-self: flex-end;
+  justify-self: center;
+  font-size: small;
+  /* background-color: #4c0090; */
+}
+
+.user > div:last-child {
+  align-self: flex-start;
+  justify-self: center;
+  font-size: small;
+  /* padding-left: 10%;
+  padding-right: 10%; */
+  /* background-color: #4c0090; */
+}
+input {
+    width: 100%;
+}
+button {
+    background-color: #4caf50;
+
+}

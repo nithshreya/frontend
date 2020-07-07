@@ -55,17 +55,17 @@ class UserListComponent extends Component {
   render() {
     return (
       <div class="user-list">
-        <div class="subgrid1">
-          <div class="n1">
+        <div class="details">
+          <div class="members">
             <b>Members</b>
           </div>
-          <div class="n2">
+          <div class="add-member">
             <button type="button" onClick={this.newUser}>
-              Add Member
+              <b>+Add</b>
             </button>
           </div>
         </div>
-        <div class="subgrid2">
+        <div class="info">
           <div class="table">
             <table>
               <thead>

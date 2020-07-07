@@ -1,7 +1,8 @@
 button {
-  background-color: #4c0090;
+  /* background-color: #4c0090; */
+  background-color: #242133;
   color: white;
-  padding: 12px 15px;
+  padding: 5px 8px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
@@ -11,51 +12,95 @@ button {
 .user-list {
   display: grid;
   grid-template-rows: 1fr 5fr;
-  row-gap: 2em;
+  /* row-gap: 2em; */
   width: 100vw;
   height: 100vh;
 }
 
-.subgrid1 {
+.details {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3.21fr 1fr;
 }
 
-.subgrid1 > div:first-child {
-  padding: 1em 2em;
+.details > div:first-child {
+  align-self: center;
+  padding-left: 15%;
   font-size: xx-large;
   /* background-color: #4c0090; */
 }
 
-.subgrid1 > div:last-child {
+.details > div:last-child {
   align-self: flex-end;
   padding-right: 5em;
+  justify-self: start;
+  /* background-color: #4c0090; */
+
 }
 
-/* .user-list > div:last-child {
-  width: 100vw;
-  background-color: #4c0090;
-  justify-self: center;
-  padding-right: 5em;
-} */
-
-.subgrid2 {
+.info {
   display: grid;
   grid-template-columns: 1fr;
+  /* background-color: #4c0090; */
+
 }
 
 .table {
-  background-color:rgb(38, 35, 53);
+  /* background-color:rgb(38, 35, 53); */
   align-self: flex-start;
   justify-self: center;
   table-layout: fixed;
-  width: 80%;
+  width: 60%;
   border-collapse: collapse;
-  border: 3px solid #4c0090;
+  
+  /* border: 3px solid #35304e; */
+  /* padding-left: 30px; */
 }
 
-/* .user-list > div:nth-child(2) {
-}
-
-.user-list > div:last-child {
+/* thead {
+  text-align: center;
 } */
+
+thead th:nth-child(1) {
+  width: 5%;
+}
+
+thead th:nth-child(2) {
+  width: 40%;
+}
+
+thead th:nth-child(3) {
+  width: 12%;
+}
+
+thead th:nth-child(4) {
+  width: 15%;
+}
+thead th:nth-child(5) {
+  width: 20%;
+}
+thead th:nth-child(6) {
+  width: 15%;
+}
+
+th, td {
+  padding: 10px;
+}
+
+tbody td {
+  text-align: center;
+}
+
+thead th {
+  background: linear-gradient(to bottom, rgba(4, 61, 56, 0.1), rgba(3, 41, 25,0.8));
+  /* border: 3px solid #1b1731; */
+}
+
+tbody tr:nth-child(odd) {
+  /* background-color: #073b58; */
+  background-color: #24405a;
+
+}
+
+tbody tr:nth-child(even) {
+  background-color: #23486b;
+}
