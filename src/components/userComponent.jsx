@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// var FormData = require('form-data');
 import "./userComponent.css";
 // import { BrowserRouter, Route, Link } from "react-router-dom";
 
@@ -17,6 +18,7 @@ class UserComponent extends Component {
       },
       updatedUser: {},
       already: 1,
+      selectedFile: null,
     };
   }
 
@@ -31,7 +33,7 @@ class UserComponent extends Component {
   editUser = () => {
     axios
       .patch(
-        `http://localhost:5000/users/${this.props.match.params.id}`,
+        `http://localhost:5000/api/v1/users/${this.props.match.params.id}`,
         this.state.updatedUser,
         {
           headers: {
@@ -50,7 +52,11 @@ class UserComponent extends Component {
 
   createUser = () => {
     axios
-      .post(`http://localhost:5000/users`, this.state.updatedUser)
+      .post(`http://localhost:5000/api/v1/users`, this.state.updatedUser, {
+        headers: {
+          authorization: localStorage.getItem("Token"),
+        },
+      })
       .then((response) => {
         this.setState({ ...this.state });
         console.log(response);
@@ -60,18 +66,51 @@ class UserComponent extends Component {
       });
   };
 
+  onChangeHandler = (event) => {
+    console.log(event.target.files[0]);
+    this.setState({
+      ...this.state,
+      selectedFile: event.target.files[0],
+      loaded: 0,
+    });
+    // console.log(this.state.selectedFile);
+  };
+
+  uploadImage = () => {
+    const url = "http://localhost:5000/api/v1/files";
+    const data = new FormData();
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    data.append("uploaded-file", this.state.selectedFile);
+    for (var value of data.values()) {
+      console.log(value);
+    }
+    axios
+      .post(url, data, {
+        headers: {
+          authorization: localStorage.getItem("Token"),
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((req) => {
+        console.log("................");
+        console.log("Req done: ", req);
+        this.setState({
+          ...this.state,
+          updatedUser: { ...this.state.updatedUser, profilePic: req.data },
+        });
+      })
+      .catch((err) => {
+        console.log("..");
+        console.error("Error: ", err);
+      });
+  };
+
   changeName = (e) => {
     // console.log(e.target.value);
     this.setState({
       ...this.state,
       updatedUser: { ...this.state.updatedUser, name: e.target.value },
     });
-    // if (!e.target.value) {
-    //   this.setState({
-    //     ...this.state,
-    //     user: { ...this.state.user, name: "" },
-    //   });
-    // }
   };
 
   changeAge = (e) => {
@@ -121,11 +160,11 @@ class UserComponent extends Component {
     if (!this.props.match.params.id) {
       this.setState({ ...this.state, already: 0 });
     }
-    if (this.state.already == 0) {
+    if (this.state.already === 0) {
       return;
     }
     axios
-      .get(`http://localhost:5000/users/${this.props.match.params.id}`, {
+      .get(`http://localhost:5000/api/v1/users/${this.props.match.params.id}`, {
         headers: {
           authorization: localStorage.getItem("Token"),
         },
@@ -176,23 +215,33 @@ class UserComponent extends Component {
       }
     };
     return (
-      <div class="user">
-        <div class="user-data">
+      <div className="user">
+        <div className="user-data">
           <h1>User Data</h1>
         </div>
-        <div class="user-info">
+        <div className="user-info">
           <label htmlFor="fname">Name: </label>
           <input
             type="text"
             id="fname"
             name="fname"
             value={
-              this.state.updatedUser.name == undefined
+              this.state.updatedUser.name === undefined
                 ? this.state.user.name
                 : this.state.updatedUser.name
             }
             onChange={this.changeName}
           ></input>
+          <label htmlFor="profile-pic">Profile Pic: </label>
+          <input
+            type="file"
+            id="profile-pic"
+            name="profile-pic"
+            onChange={this.onChangeHandler}
+          />
+          <button type="button" id="button" onClick={this.uploadImage}>
+            Upload
+          </button>
           <br />
           <label htmlFor="age">Age: </label>
           <input
@@ -200,7 +249,7 @@ class UserComponent extends Component {
             id="age"
             name="age"
             value={
-              this.state.updatedUser.age == undefined
+              this.state.updatedUser.age === undefined
                 ? this.state.user.age
                 : this.state.updatedUser.age
             }
@@ -213,7 +262,7 @@ class UserComponent extends Component {
             id="pin"
             name="pin"
             value={
-              this.state.updatedUser.pin == undefined
+              this.state.updatedUser.pin === undefined
                 ? this.state.user.pin
                 : this.state.updatedUser.pin
             }
@@ -223,7 +272,7 @@ class UserComponent extends Component {
           <label htmlFor="role">Role: </label>
           <select
             value={
-              this.state.updatedUser.role == undefined
+              this.state.updatedUser.role === undefined
                 ? this.state.user.role
                 : this.state.updatedUser.role
             }
@@ -238,15 +287,14 @@ class UserComponent extends Component {
             <div>
               <input
                 type="radio"
-                class="sex"
+                className="sex"
                 name="sex"
                 value="M"
                 checked={
-                  this.state.updatedUser.sex == undefined
+                  this.state.updatedUser.sex === undefined
                     ? this.state.user.sex === "M"
                     : this.state.updatedUser.sex === "M"
                 }
-                onChange={this.changeRole}
                 onChange={this.changeSex}
               />
               <span>Male</span>
@@ -254,11 +302,11 @@ class UserComponent extends Component {
             <div>
               <input
                 type="radio"
-                class="sex"
+                className="sex"
                 name="sex"
                 value="F"
                 checked={
-                  this.state.updatedUser.sex == undefined
+                  this.state.updatedUser.sex === undefined
                     ? this.state.user.sex === "F"
                     : this.state.updatedUser.sex === "F"
                 }

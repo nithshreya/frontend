@@ -12,7 +12,7 @@ class Login extends Component {
 
   doLogin = () => {
     axios
-      .post("http://localhost:5000/users/login", {
+      .post("http://localhost:5000/api/v1/users/login", {
         username: this.state.username,
         password: this.state.password,
       })

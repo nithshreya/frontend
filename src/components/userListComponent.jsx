@@ -19,7 +19,7 @@ class UserListComponent extends Component {
 
   getUser = () => {
     axios
-      .get("http://localhost:5000/users", {
+      .get("http://localhost:5000/api/v1/users", {
         headers: {
           authorization: localStorage.getItem("Token"),
         },
@@ -54,23 +54,24 @@ class UserListComponent extends Component {
 
   render() {
     return (
-      <div class="user-list">
-        <div class="details">
-          <div class="members">
+      <div className="user-list">
+        <div className="details">
+          <div className="members">
             <b>Members</b>
           </div>
-          <div class="add-member">
+          <div className="add-member">
             <button type="button" onClick={this.newUser}>
               <b>+Add</b>
             </button>
           </div>
         </div>
-        <div class="info">
-          <div class="table">
+        <div className="info">
+          <div className="table">
             <table>
               <thead>
                 <tr>
                   <th>#</th>
+                  <th>pic</th>
                   <th>Name</th>
                   <th>Age</th>
                   <th>Sex</th>
@@ -84,6 +85,7 @@ class UserListComponent extends Component {
                   return (
                     <tr key={i} onClick={() => this.sayHello(user)}>
                       <td>{i + 1}</td>
+                      <td><img src="data:image/png;base64,{{user.image}}"/></td>
                       <td>{user.name}</td>
                       <td>{user.age}</td>
                       <td>{user.sex}</td>
