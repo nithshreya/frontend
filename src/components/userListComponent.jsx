@@ -70,7 +70,6 @@ class UserListComponent extends Component {
             <table>
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>pic</th>
                   <th>Name</th>
                   <th>Age</th>
@@ -84,8 +83,7 @@ class UserListComponent extends Component {
                   // console.log({user})
                   return (
                     <tr key={i} onClick={() => this.sayHello(user)}>
-                      <td>{i + 1}</td>
-                      <td><img src="data:image/png;base64,{{user.image}}"/></td>
+                      <td><img className='profile-pic' src={`data:image/png;base64,${user.image}`}/></td>
                       <td>{user.name}</td>
                       <td>{user.age}</td>
                       <td>{user.sex}</td>
