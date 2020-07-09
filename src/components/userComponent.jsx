@@ -15,6 +15,7 @@ class UserComponent extends Component {
         pin: "",
         sex: "",
         role: "",
+        image: "",
       },
       updatedUser: {},
       already: 1,
@@ -170,10 +171,10 @@ class UserComponent extends Component {
         },
       })
       .then((response) => {
-        const { name, age, sex, pin, role } = response.data;
+        const { name, age, sex, pin, role, image } = response.data;
         this.setState(
           {
-            user: { name, age, sex, pin, role },
+            user: { name, age, sex, pin, role, image },
           },
           () => {
             console.log(this.state.user);
@@ -186,6 +187,8 @@ class UserComponent extends Component {
   }
 
   render() {
+
+    console.log(this.state.user)
     const checkExistance = () => {
       if (this.state.already) {
         return;
@@ -220,106 +223,114 @@ class UserComponent extends Component {
           <h1>User Data</h1>
         </div>
         <div className="user-info">
-          <label htmlFor="fname">Name: </label>
-          <input
-            type="text"
-            id="fname"
-            name="fname"
-            value={
-              this.state.updatedUser.name === undefined
-                ? this.state.user.name
-                : this.state.updatedUser.name
-            }
-            onChange={this.changeName}
-          ></input>
-          <label htmlFor="profile-pic">Profile Pic: </label>
-          <input
-            type="file"
-            id="profile-pic"
-            name="profile-pic"
-            onChange={this.onChangeHandler}
-          />
-          <button type="button" id="button" onClick={this.uploadImage}>
-            Upload
-          </button>
-          <br />
-          <label htmlFor="age">Age: </label>
-          <input
-            type="text"
-            id="age"
-            name="age"
-            value={
-              this.state.updatedUser.age === undefined
-                ? this.state.user.age
-                : this.state.updatedUser.age
-            }
-            onChange={this.changeAge}
-          ></input>
-          <br />
-          <label htmlFor="pin">Pin: </label>
-          <input
-            type="text"
-            id="pin"
-            name="pin"
-            value={
-              this.state.updatedUser.pin === undefined
-                ? this.state.user.pin
-                : this.state.updatedUser.pin
-            }
-            onChange={this.changePin}
-          ></input>
-          <br />
-          <label htmlFor="role">Role: </label>
-          <select
-            value={
-              this.state.updatedUser.role === undefined
-                ? this.state.user.role
-                : this.state.updatedUser.role
-            }
-            onChange={this.changeRole}
-          >
-            <option name="admin"> admin</option>
-            <option name="user">user</option>
-          </select>
-          <br />
-          <label htmlFor="sex">Sex: </label>
           <div>
-            <div>
-              <input
-                type="radio"
-                className="sex"
-                name="sex"
-                value="M"
-                checked={
-                  this.state.updatedUser.sex === undefined
-                    ? this.state.user.sex === "M"
-                    : this.state.updatedUser.sex === "M"
-                }
-                onChange={this.changeSex}
-              />
-              <span>Male</span>
-            </div>
-            <div>
-              <input
-                type="radio"
-                className="sex"
-                name="sex"
-                value="F"
-                checked={
-                  this.state.updatedUser.sex === undefined
-                    ? this.state.user.sex === "F"
-                    : this.state.updatedUser.sex === "F"
-                }
-                onChange={this.changeSex}
-              />
-              <span>Female</span>
-            </div>
+            <img
+              className="user-pic"
+              src={`data:image/png;base64,${this.state.user.image}`}
+            />
+            <label htmlFor="profile-pic">Profile Pic: </label>
+            <input
+              type="file"
+              id="profile-pic"
+              name="profile-pic"
+              onChange={this.onChangeHandler}
+            />
+            <button type="button" id="button" onClick={this.uploadImage}>
+              Upload
+            </button>
           </div>
           <br />
-          {checkExistance()}
-          <button type="button" onClick={this.saveChanges}>
-            Save
-          </button>
+          <div>
+            <label htmlFor="fname">Name: </label>
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              value={
+                this.state.updatedUser.name === undefined
+                  ? this.state.user.name
+                  : this.state.updatedUser.name
+              }
+              onChange={this.changeName}
+            ></input>
+            <label htmlFor="age">Age: </label>
+            <input
+              type="text"
+              id="age"
+              name="age"
+              value={
+                this.state.updatedUser.age === undefined
+                  ? this.state.user.age
+                  : this.state.updatedUser.age
+              }
+              onChange={this.changeAge}
+            ></input>
+            <br />
+            <label htmlFor="pin">Pin: </label>
+            <input
+              type="text"
+              id="pin"
+              name="pin"
+              value={
+                this.state.updatedUser.pin === undefined
+                  ? this.state.user.pin
+                  : this.state.updatedUser.pin
+              }
+              onChange={this.changePin}
+            ></input>
+            <br />
+            <label htmlFor="role">Role: </label>
+            <select
+              value={
+                this.state.updatedUser.role === undefined
+                  ? this.state.user.role
+                  : this.state.updatedUser.role
+              }
+              onChange={this.changeRole}
+            >
+              <option name="admin"> admin</option>
+              <option name="user">user</option>
+            </select>
+            <br />
+            <label htmlFor="sex">Sex: </label>
+            {/* <div>
+              <div> */}
+            <input
+              type="radio"
+              className="sex"
+              name="sex"
+              value="M"
+              checked={
+                this.state.updatedUser.sex === undefined
+                  ? this.state.user.sex === "M"
+                  : this.state.updatedUser.sex === "M"
+              }
+              onChange={this.changeSex}
+            />
+            <span>Male</span>
+            {/* </div>
+              <div> */}
+            <input
+              type="radio"
+              className="sex"
+              name="sex"
+              value="F"
+              checked={
+                this.state.updatedUser.sex === undefined
+                  ? this.state.user.sex === "F"
+                  : this.state.updatedUser.sex === "F"
+              }
+              onChange={this.changeSex}
+            />
+            <span>Female</span>
+            {/* </div>
+            </div> */}
+            <br />
+            {checkExistance()}
+            <button type="button" onClick={this.saveChanges}>
+              Save
+            </button>
+          </div>
         </div>
       </div>
     );
