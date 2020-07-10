@@ -17,6 +17,7 @@ class Login extends Component {
         password: this.state.password,
       })
       .then((response) => {
+        console.log(response)
         this.props.handleLogin(response.data.token);
       })
       .catch(function (error) {
@@ -43,7 +44,7 @@ class Login extends Component {
 
   //   }
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div class="login-page">
         <div class="1">Welcome!</div>
