@@ -67,6 +67,19 @@ class UserComponent extends Component {
       });
   };
 
+  deleteUser = () => {
+    axios.delete(
+      `http://localhost:5000/api/v1/users/${this.props.match.params.id}`,
+      {
+        headers: {
+          authorization: localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
+      this.props.history.push(`/`);
+    })
+  };
+
   onChangeHandler = (event) => {
     console.log(event.target.files[0]);
     this.setState({
@@ -187,8 +200,7 @@ class UserComponent extends Component {
   }
 
   render() {
-
-    console.log(this.state.user)
+    console.log(this.state.user);
     const checkExistance = () => {
       if (this.state.already) {
         return;
@@ -288,6 +300,7 @@ class UserComponent extends Component {
               }
               onChange={this.changeRole}
             >
+              <option value="">--Please choose an option--</option>
               <option name="admin"> admin</option>
               <option name="user">user</option>
             </select>
@@ -329,6 +342,9 @@ class UserComponent extends Component {
             {checkExistance()}
             <button type="button" onClick={this.saveChanges}>
               Save
+            </button>
+            <button type="button" onClick={this.deleteUser}>
+              Delete
             </button>
           </div>
         </div>

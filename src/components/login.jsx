@@ -15,9 +15,13 @@ class Login extends Component {
       .post("http://localhost:5000/api/v1/users/login", {
         username: this.state.username,
         password: this.state.password,
+      },{
+        headers:{
+          'Access-Control-Allow-Origin':'*'
+        }
       })
       .then((response) => {
-        console.log(response)
+        // console.log(response.data.token)
         this.props.handleLogin(response.data.token);
       })
       .catch(function (error) {
@@ -46,15 +50,15 @@ class Login extends Component {
   render() {
     // console.log(this.props);
     return (
-      <div class="login-page">
-        <div class="1">Welcome!</div>
-        <div class="form">
-          <div class="n1">
+      <div className="login-page">
+        <div className="1">Welcome!</div>
+        <div className="form">
+          <div className="n1">
             <h2>
               <b>Login</b>
             </h2>
           </div>
-          <div class="n2">
+          <div className="n2">
             <label htmlFor="username">
               <strong>Username</strong>
             </label>
@@ -82,7 +86,7 @@ class Login extends Component {
             ></input>
             <br />
           </div>
-          <div class="login-button">
+          <div className="login-button">
             <button id="button" onClick={this.doLogin}>
               Login
             </button>
