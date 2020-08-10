@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // var FormData = require('form-data');
-import "./userComponent.css";
+import "../componentsCSS/userComponent.css";
 // import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const axios = require("axios");
@@ -238,7 +238,10 @@ class UserComponent extends Component {
           <div>
             <img
               className="user-pic"
-              src={`data:image/png;base64,${this.state.user.image}`}
+              // src={`data:image/png;base64,${this.state.user.image}`}
+              src={`data:image/png;base64,${this.state.updatedUser.profilePic === undefined
+                ? this.state.user.image
+                : this.state.updatedUser.profilePic}`}
             />
             <label htmlFor="profile-pic">Profile Pic: </label>
             <input

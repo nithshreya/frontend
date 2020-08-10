@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./userListComponent.css";
+import "../componentsCSS/userListComponent.css";
 
 // import { hashHistory } from 'react-router';
 import { withRouter } from "react-router-dom";
