@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../componentsCSS/userListComponent.css";
+import defaultIcon from "./defaultIcon.jpg";
 
 // import { hashHistory } from 'react-router';
 import { withRouter } from "react-router-dom";
@@ -27,7 +28,9 @@ class UserListComponent extends Component {
       .then((response) => {
         // handle success
         console.log(response.data);
-        this.setState({ users: response.data.users });
+        this.setState({ users: response.data.users }, () =>
+          console.log("image" in this.state.users)
+        );
       })
       .catch((error) => {
         // handle error
@@ -83,7 +86,19 @@ class UserListComponent extends Component {
                   // console.log({user})
                   return (
                     <tr key={i} onClick={() => this.sayHello(user)}>
-                      <td><img className='profile-pic' src={`data:image/png;base64,${user.image}`}/></td>
+                      {/* <td><img className='profile-pic' src={`data:image/png;base64,${user.image}`}/></td> */}
+                      {"image" in user ? (
+                        <td>
+                          <img
+                            className="profile-pic"
+                            src={`data:image/png;base64,${user.image}`}
+                          />
+                        </td>
+                      ) : (
+                        <td>
+                          <img className="profile-pic" src={defaultIcon} />
+                        </td>
+                      )}
                       <td>{user.name}</td>
                       <td>{user.age}</td>
                       <td>{user.sex}</td>

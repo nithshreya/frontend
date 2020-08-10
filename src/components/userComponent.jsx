@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 // var FormData = require('form-data');
 import "../componentsCSS/userComponent.css";
+import defaultIcon from "./defaultIcon.jpg";
+
 // import { BrowserRouter, Route, Link } from "react-router-dom";
 
 const axios = require("axios");
@@ -68,16 +70,18 @@ class UserComponent extends Component {
   };
 
   deleteUser = () => {
-    axios.delete(
-      `http://localhost:5000/api/v1/users/${this.props.match.params.id}`,
-      {
-        headers: {
-          authorization: localStorage.getItem("Token"),
-        },
-      }
-    ).then((response) => {
-      this.props.history.push(`/`);
-    })
+    axios
+      .delete(
+        `http://localhost:5000/api/v1/users/${this.props.match.params.id}`,
+        {
+          headers: {
+            authorization: localStorage.getItem("Token"),
+          },
+        }
+      )
+      .then((response) => {
+        this.props.history.push(`/`);
+      });
   };
 
   onChangeHandler = (event) => {
@@ -239,9 +243,11 @@ class UserComponent extends Component {
             <img
               className="user-pic"
               // src={`data:image/png;base64,${this.state.user.image}`}
-              src={`data:image/png;base64,${this.state.updatedUser.profilePic === undefined
-                ? this.state.user.image
-                : this.state.updatedUser.profilePic}`}
+              src={
+                this.state.user.image === undefined
+                  ?  defaultIcon 
+                  : `data:image/png;base64,${this.state.user.image}`
+              }
             />
             <label htmlFor="profile-pic">Profile Pic: </label>
             <input
